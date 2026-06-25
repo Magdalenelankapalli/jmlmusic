@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Albums Management</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<div class="main">
+
+    <h1>Albums Management</h1>
+
+    <div class="card">
+
+        <h2>Add New Album</h2>
+
+        <input type="text" id="albumName" placeholder="Album Name">
+        <br><br>
+
+        <button id="addAlbumBtn">Add Album</button>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Album List</h2>
+
+        <table id="albumsTable" border="1" width="100%">
+
+            <tr>
+                <th>Album Name</th>
+                <th>Action</th>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+const addAlbumBtn = document.getElementById("addAlbumBtn");
+const albumsTable = document.getElementById("albumsTable");
+
+loadAlbums();
+
+async function loadAlbums() {
+
+    try {
+
+        const response =
+        await fetch("http://localhost:5000/albums");
+
+        const albums =
+        await response.json();
+
+        albums.forEach(album => {
+
+            const row =
+            document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${album.name}</td>
+                <td>
+                    <button>Delete</button>
+                </td>
+            `;
+
+            albumsTable.appendChild(row);
+
+        });
+
+    } catch(error) {
+
+        console.log(error);
+
+    }
+
+}
+
+addAlbumBtn.addEventListener("click", async () => {
+
+    const albumName =
+    document.getElementById("albumName").value;
+
+    if(albumName === "") {
+
+        alert("Enter Album Name");
+        return;
+
+    }
+
+    const albumData = {
+
+        name: albumName
+
+    };
+
+    try {
+
+        await fetch(
+            "http://localhost:5000/albums",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                    "application/json"
+                },
+                body: JSON.stringify(albumData)
+            }
+        );
+
+        location.reload();
+
+    } catch(error) {
+
+        console.log(error);
+        alert("Error Saving Album");
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

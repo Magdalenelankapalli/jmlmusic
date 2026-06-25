@@ -1,0 +1,119 @@
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0f0f0f;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.login-container{
+    background:#1a1a1a;
+    padding:30px;
+    border-radius:15px;
+    width:350px;
+    text-align:center;
+}
+
+h1{
+    color:#ffcc00;
+}
+
+h2{
+    color:white;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:8px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#ffcc00;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:220px;
+    height:100%;
+    background:#111;
+    padding-top:20px;
+}
+
+.sidebar h2{
+    color:#ffcc00;
+    text-align:center;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    padding:15px;
+    text-decoration:none;
+}
+
+.sidebar a:hover{
+    background:#ffcc00;
+    color:black;
+}
+
+.main{
+    margin-left:240px;
+    padding:20px;
+    color:white;
+}
+
+.cards{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:#1a1a1a;
+    padding:20px;
+    border-radius:10px;
+    width:200px;
+    text-align:center;
+}
+.actions{
+    margin-top:40px;
+}
+
+.actions button{
+    background:#ffcc00;
+    border:none;
+    padding:12px 20px;
+    margin:10px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+table{
+    color:white;
+    border-collapse:collapse;
+}
+
+th,td{
+    border:1px solid #444;
+    padding:10px;
+    text-align:center;
+}
+
+input[type="text"]{
+    width:90%;
+    padding:10px;
+    border-radius:8px;
+    border:none;
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JML Music - Songs</title>
+
+<style>
+
+body{
+    background:#111;
+    color:white;
+    font-family:Arial,sans-serif;
+    margin:0;
+    padding:20px;
+}
+
+nav{
+    background:#1a1a1a;
+    padding:15px;
+    text-align:center;
+}
+
+nav a{
+    color:#ffcc00;
+    text-decoration:none;
+    margin:0 15px;
+    font-weight:bold;
+}
+
+h1{
+    text-align:center;
+    color:#ffcc00;
+    margin-top:30px;
+}
+
+#searchInput{
+    width:350px;
+    max-width:90%;
+    padding:12px;
+    display:block;
+    margin:20px auto;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+}
+
+#songs-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+    gap:20px;
+}
+
+.song-card{
+    background:#1a1a1a;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    max-width:350px;
+    margin:auto;
+}
+
+.song-card img{
+    width:250px;
+    height:250px;
+    object-fit:contain;
+    background:#111;
+    border-radius:10px;
+}
+
+.song-card h3{
+    color:#ffcc00;
+}
+
+audio{
+    width:100%;
+    margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="songs.html">Songs</a>
+    <a href="albums.html">Albums</a>
+    <a href="artists.html">Artists</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<h1>Latest Songs</h1>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search Songs, Artists or Albums...">
+
+<div id="songs-list"></div>
+
+<script>
+
+let allSongs = [];
+
+fetch("songs.json")
+.then(response => response.json())
+.then(data => {
+
+    allSongs = data;
+    displaySongs(allSongs);
+
+})
+.catch(error => {
+    console.log(error);
+});
+
+function displaySongs(songs){
+
+    const songsList =
+    document.getElementById("songs-list");
+
+    songsList.innerHTML = "";
+
+    songs.forEach(song => {
+
+        songsList.innerHTML += `
+        <div class="song-card">
+
+            <img src="uploads/${song.coverFile}">
+
+            <h3>${song.songName}</h3>
+
+            <p><b>Artist:</b> ${song.artistName}</p>
+
+            <p><b>Album:</b> ${song.albumName}</p>
+
+            <audio controls>
+                <source
+                src="uploads/${song.songFile}"
+                type="audio/mpeg">
+            </audio>
+
+        </div>
+        `;
+    });
+
+}
+
+document
+.getElementById("searchInput")
+.addEventListener("keyup", function(){
+
+    const keyword =
+    this.value.toLowerCase();
+
+    const filteredSongs =
+    allSongs.filter(song =>
+
+        song.songName
+        .toLowerCase()
+        .includes(keyword)
+
+        ||
+
+        song.artistName
+        .toLowerCase()
+        .includes(keyword)
+
+        ||
+
+        song.albumName
+        .toLowerCase()
+        .includes(keyword)
+
+    );
+
+    displaySongs(filteredSongs);
+
+});
+
+</script>
+
+</body>
+</html>

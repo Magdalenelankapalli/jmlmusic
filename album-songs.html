@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Album Songs</title>
+
+<style>
+body{
+    background:#111;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+h1{
+    color:#ffcc00;
+}
+
+.song-card{
+    width:350px;
+    margin:20px auto;
+    background:#1a1a1a;
+    padding:20px;
+    border-radius:10px;
+}
+
+.song-card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+audio{
+    width:100%;
+    margin-top:10px;
+}
+</style>
+</head>
+<body>
+
+<h1 id="albumTitle"></h1>
+
+<div id="songsContainer"></div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const albumName = params.get("album");
+
+document.getElementById("albumTitle").innerText = albumName;
+
+fetch("songs.json")
+.then(res => res.json())
+.then(data => {
+
+    const songsContainer =
+    document.getElementById("songsContainer");
+
+    const albumSongs =
+    data.filter(song =>
+        song.albumName === albumName
+    );
+
+    albumSongs.forEach(song => {
+
+        songsContainer.innerHTML += `
+        <div class="song-card">
+
+            <img src="uploads/${song.coverFile}">
+
+            <h2>${song.songName}</h2>
+
+            <p>${song.artistName}</p>
+
+            <audio controls>
+                <source
+                src="uploads/${song.songFile}"
+                type="audio/mpeg">
+            </audio>
+
+        </div>
+        `;
+    });
+
+});
+
+</script>
+
+</body>
+</html>

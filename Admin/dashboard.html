@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="admin.css">
+
+<style>
+.main{
+    margin-left:240px;
+    padding:20px;
+    color:white;
+}
+
+.cards{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:#1a1a1a;
+    padding:20px;
+    border-radius:10px;
+    width:220px;
+    text-align:center;
+}
+
+.card h2{
+    color:#ffcc00;
+    font-size:35px;
+}
+
+.actions{
+    margin-top:40px;
+}
+
+.actions button{
+    width:100%;
+    padding:15px;
+    margin:10px 0;
+    border:none;
+    border-radius:8px;
+    background:#ffcc00;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.actions button:hover{
+    background:orange;
+}
+</style>
+
+</head>
+<body>
+
+<div class="main">
+
+<h1>Admin Dashboard</h1>
+
+<div class="cards">
+
+<div class="card">
+<h2 id="songsCount">0</h2>
+<p>Total Songs</p>
+</div>
+
+<div class="card">
+<h2 id="artistsCount">0</h2>
+<p>Artists</p>
+</div>
+
+<div class="card">
+<h2 id="albumsCount">0</h2>
+<p>Albums</p>
+</div>
+
+<div class="card">
+<h2 id="usersCount">0</h2>
+<p>Users</p>
+</div>
+
+</div>
+
+<div class="actions">
+
+<h2>Quick Actions</h2>
+
+<button onclick="window.location.href='songs-admin.html'">
+Add New Song
+</button>
+
+<button onclick="window.location.href='artists-admin.html'">
+Add Artist
+</button>
+
+<button onclick="window.location.href='albums-admin.html'">
+Create Album
+</button>
+
+<button onclick="window.location.href='users-admin.html'">
+View Users
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+async function loadDashboard() {
+
+try {
+
+const artistsRes = await fetch("http://localhost:5000/artists");
+const artists = await artistsRes.json();
+
+document.getElementById("artistsCount").innerText =
+artists.length;
+
+} catch(err){
+console.log(err);
+}
+
+try {
+
+const albumsRes = await fetch("http://localhost:5000/albums");
+const albums = await albumsRes.json();
+
+document.getElementById("albumsCount").innerText =
+albums.length;
+
+} catch(err){
+console.log(err);
+}
+
+try {
+
+const songs = await fetch("../songs.json");
+const songsData = await songs.json();
+
+document.getElementById("songsCount").innerText =
+songsData.length;
+
+} catch(err){
+console.log(err);
+}
+
+}
+
+loadDashboard();
+
+</script>
+
+</body>
+</html>

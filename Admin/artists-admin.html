@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artists Management</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="main">
+
+<h1>Artists Management</h1>
+
+<div class="card">
+
+<h2>Add New Artist</h2>
+
+<input type="text" id="artistName" placeholder="Artist Name">
+<br><br>
+
+<input type="text" id="artistRole" placeholder="Singer / Music Director">
+<br><br>
+
+<button onclick="addArtist()">Add Artist</button>
+
+</div>
+
+<div class="card">
+
+<h2>Artist List</h2>
+
+<table id="artistsTable">
+
+<tr>
+<th>Name</th>
+<th>Role</th>
+<th>Action</th>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+async function addArtist(){
+
+const name =
+document.getElementById("artistName").value;
+
+const role =
+document.getElementById("artistRole").value;
+
+if(!name || !role){
+
+alert("Fill all fields");
+return;
+
+}
+
+await fetch(
+"http://localhost:5000/artists",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+name,
+role
+})
+}
+);
+
+document.getElementById("artistName").value="";
+document.getElementById("artistRole").value="";
+
+loadArtists();
+
+}
+
+async function deleteArtist(name){
+
+if(!confirm("Delete Artist?"))
+return;
+
+await fetch(
+`http://localhost:5000/artists/${name}`,
+{
+method:"DELETE"
+}
+);
+
+loadArtists();
+
+}
+
+async function loadArtists(){
+
+const response =
+await fetch(
+"http://localhost:5000/artists"
+);
+
+const artists =
+await response.json();
+
+const table =
+document.getElementById("artistsTable");
+
+table.innerHTML = `
+<tr>
+<th>Name</th>
+<th>Role</th>
+<th>Action</th>
+</tr>
+`;
+
+artists.forEach(artist=>{
+
+table.innerHTML += `
+<tr>
+
+<td>${artist.name}</td>
+
+<td>${artist.role}</td>
+
+<td>
+<button
+onclick="deleteArtist('${artist.name}')">
+Delete
+</button>
+</td>
+
+</tr>
+`;
+
+});
+
+}
+
+loadArtists();
+
+</script>
+
+</body>
+</html>

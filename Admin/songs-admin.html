@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JML Music - Songs Management</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>JML Music</h2>
+
+    <a href="dashboard.html">Dashboard</a>
+    <a href="songs-admin.html">Songs</a>
+    <a href="artists-admin.html">Artists</a>
+    <a href="albums-admin.html">Albums</a>
+    <a href="users-admin.html">Users</a>
+</div>
+
+<div class="main">
+    <h1>Song Management</h1>
+
+    <div class="card">
+        <h2>Add New Song</h2>
+
+        <input type="text" id="songName" placeholder="Song Name">
+        <br><br>
+
+        <input type="text" id="artistName" placeholder="Artist Name">
+        <br><br>
+
+        <input type="text" id="albumName" placeholder="Album Name">
+        <br><br>
+
+        <label>Upload MP3</label>
+        <br>
+        <input type="file" id="songFile" accept=".mp3">
+        <br><br>
+
+        <label>Upload Cover Image</label>
+        <br>
+        <input type="file" id="coverFile" accept="image/*">
+        <br><br>
+
+        <button onclick="uploadSong()">Save Song</button>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <h2>Uploaded Songs</h2>
+
+        <table width="100%">
+            <tr>
+                <th>Song</th>
+                <th>Artist</th>
+                <th>Album</th>
+            </tr>
+
+            <tr>
+                <td>Sample Song</td>
+                <td>JML Artist</td>
+                <td>JML Album</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script src="admin.js"></script>
+</body>
+</html>
