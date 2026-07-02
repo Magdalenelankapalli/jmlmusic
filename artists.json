@@ -1,13 +1,5 @@
 [
   {
-    "name": "sunil kumar",
-    "role": "singer"
-  },
-  {
-    "name": "maggie",
-    "role": "singer"
-  },
-  {
     "name": "chanti ",
     "role": "singer"
   },
@@ -18,5 +10,9 @@
   {
     "name": "dev",
     "role": "singer"
+  },
+  {
+    "name": "sunil kumar",
+    "role": "music director"
   }
 ]

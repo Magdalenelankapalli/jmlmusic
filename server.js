@@ -3,12 +3,54 @@ const multer = require("multer");
 const cors = require("cors");
 const fs = require("fs");
 const app = express();
+//const { MongoClient } = require("mongodb");
+
+//const uri = "mongodb+srv://lankapallimagdalene_db_user:magdalene2006DB@cluster0.rn5dam5.mongodb.net/?appName=Cluster0";
+
+//const client = new MongoClient(uri);
+
+//async function connectDB() {
+  //try //{
+    //await client.connect();
+    //console.log("MongoDB Connected");
+  //} catch (err) {
+    //console.log(err);
+  //}
+//}
+
+//connectDB();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
+});
+// Get Social Links
+app.get("/social", (req, res) => {
+    if (!fs.existsSync("social.json")) {
+        return res.json({
+            youtube: "",
+            instagram: "",
+            facebook: ""
+        });
+    }
+
+    const social = JSON.parse(fs.readFileSync("social.json"));
+    res.json(social);
+});
+
+// Save Social Links
+app.post("/social", (req, res) => {
+    fs.writeFileSync(
+        "social.json",
+        JSON.stringify(req.body, null, 2)
+    );
+
+    res.json({
+        success: true,
+        message: "Social links updated."
+    });
 });
 const storage = multer.diskStorage({
   destination: "uploads/",

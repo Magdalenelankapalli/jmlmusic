@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JML Music | Social Media</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+    margin:0;
+    background:#0f0f0f;
+    font-family:Arial,Helvetica,sans-serif;
+    color:white;
+}
+
+header{
+    background:#181818;
+    padding:20px;
+    text-align:center;
+    font-size:32px;
+    font-weight:bold;
+    color:#ff9800;
+    box-shadow:0 2px 10px rgba(0,0,0,.5);
+}
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+    padding:50px 0;
+}
+
+.title{
+    text-align:center;
+    font-size:36px;
+    margin-bottom:15px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#bbb;
+    margin-bottom:50px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:#1c1c1c;
+    border-radius:18px;
+    padding:30px;
+    text-align:center;
+    transition:.3s;
+    box-shadow:0 0 20px rgba(0,0,0,.4);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.icon{
+    font-size:70px;
+}
+
+.card h2{
+    margin-top:20px;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#ccc;
+    margin-bottom:25px;
+}
+
+.youtube{
+    border-top:6px solid red;
+}
+
+.instagram{
+    border-top:6px solid #ff2ea6;
+}
+
+.facebook{
+    border-top:6px solid #1877f2;
+}
+
+button{
+    border:none;
+    padding:14px 28px;
+    color:white;
+    font-size:16px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.youtube button{
+    background:red;
+}
+
+.instagram button{
+    background:#ff2ea6;
+}
+
+.facebook button{
+    background:#1877f2;
+}
+
+button:hover{
+    opacity:.85;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#888;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+JML Music
+</header>
+
+<div class="container">
+
+<div class="title">
+Follow Us on Social Media
+</div>
+
+<div class="subtitle">
+Stay connected with JML Music on all platforms.
+</div>
+
+<div class="cards">
+
+<div class="card youtube">
+
+<div class="icon">▶️</div>
+
+<h2>YouTube</h2>
+
+<p>
+Watch all official songs, albums and latest releases.
+</p>
+
+<button id="youtubeBtn">
+Open YouTube
+</button>
+
+</div>
+
+<div class="card instagram">
+
+<div class="icon">📸</div>
+
+<h2>Instagram</h2>
+
+<p>
+Photos, Reels, Behind the scenes and Updates.
+</p>
+
+<button id="instagramBtn">
+Open Instagram
+</button>
+
+</div>
+
+<div class="card facebook">
+
+<div class="icon">📘</div>
+
+<h2>Facebook</h2>
+
+<p>
+Latest news, posts and announcements.
+</p>
+
+<button id="facebookBtn">
+Open Facebook
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 JML Music. All Rights Reserved.
+
+</footer>
+
+<script>
+
+document.getElementById("youtubeBtn").onclick = function () {
+    window.open("https://youtube.com/@JMLMUSIC07", "_blank");
+};
+
+document.getElementById("instagramBtn").onclick = function () {
+    window.open("https://instagram.com/jmlmusic._07", "_blank");
+};
+
+document.getElementById("facebookBtn").onclick = function () {
+    window.open("https://facebook.com/jmlmusic._07", "_blank");
+};
+
+</script>
+
+</body>
+</html>
