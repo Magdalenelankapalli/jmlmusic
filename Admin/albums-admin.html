@@ -53,7 +53,7 @@ async function loadAlbums() {
     try {
 
         const response =
-        await fetch("http://localhost:5000/albums");
+        await fetch("/albums");
 
         const albums =
         await response.json();
@@ -103,7 +103,7 @@ addAlbumBtn.addEventListener("click", async () => {
     try {
 
         await fetch(
-            "http://localhost:5000/albums",
+            "/albums",
             {
                 method: "POST",
                 headers: {

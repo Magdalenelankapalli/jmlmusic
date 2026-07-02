@@ -4,19 +4,73 @@
     <title>JML Music Admin Login</title>
     <link rel="stylesheet" href="admin.css">
 </head>
+
 <body>
 
 <div class="login-container">
+
     <h1>JML Music</h1>
     <h2>Admin Login</h2>
 
-    <input type="text" placeholder="Username" id="username">
-    <input type="password" placeholder="Password" id="password">
+    <input
+        type="text"
+        id="username"
+        placeholder="Username">
 
-    <button onclick="login()">Login</button>
+    <input
+        type="password"
+        id="password"
+        placeholder="Password">
+
+    <button onclick="login()">
+        Login
+    </button>
+
+    <p id="msg" style="color:red;"></p>
+
 </div>
 
-<script src="admin.js"></script>
+<script>
+
+async function login(){
+
+    const username =
+    document.getElementById("username").value;
+
+    const password =
+    document.getElementById("password").value;
+
+    const res = await fetch("/login",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+            username,
+            password
+        })
+
+    });
+
+    const data = await res.json();
+
+    if(data.success){
+
+        window.location.href="dashboard.html";
+
+    }else{
+
+        document.getElementById("msg").innerHTML =
+        data.message;
+
+    }
+
+}
+
+</script>
 
 </body>
 </html>

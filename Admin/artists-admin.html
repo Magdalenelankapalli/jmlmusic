@@ -63,7 +63,7 @@ return;
 }
 
 await fetch(
-"http://localhost:5000/artists",
+"/artists",
 {
 method:"POST",
 headers:{
@@ -89,7 +89,7 @@ if(!confirm("Delete Artist?"))
 return;
 
 await fetch(
-`http://localhost:5000/artists/${name}`,
+`/artists/${name}`,
 {
 method:"DELETE"
 }
@@ -103,7 +103,7 @@ async function loadArtists(){
 
 const response =
 await fetch(
-"http://localhost:5000/artists"
+"/artists"
 );
 
 const artists =

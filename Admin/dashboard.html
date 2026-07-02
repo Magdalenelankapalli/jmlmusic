@@ -118,7 +118,7 @@ async function loadDashboard() {
 
 try {
 
-const artistsRes = await fetch("http://localhost:5000/artists");
+const artistsRes = await fetch("/artists");
 const artists = await artistsRes.json();
 
 document.getElementById("artistsCount").innerText =
@@ -130,7 +130,7 @@ console.log(err);
 
 try {
 
-const albumsRes = await fetch("http://localhost:5000/albums");
+const albumsRes = await fetch("/albums");
 const albums = await albumsRes.json();
 
 document.getElementById("albumsCount").innerText =

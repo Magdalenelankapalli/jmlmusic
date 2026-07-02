@@ -1,4 +1,8 @@
+require("dotenv").config();
+const session = require("express-session");
+const bcrypt = require("bcrypt");
 const express = require("express");
+
 const multer = require("multer");
 const cors = require("cors");
 const fs = require("fs");
@@ -22,9 +26,63 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 24 * 60 * 60 * 1000
+    }
+}));
 app.use(express.static(__dirname));
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
+});
+// Login
+app.post("/login", (req, res) => {
+
+    const { username, password } = req.body;
+
+    if (
+        username === process.env.ADMIN_USERNAME &&
+        password === process.env.ADMIN_PASSWORD
+    ) {
+
+        req.session.loggedIn = true;
+
+        return res.json({
+            success: true
+        });
+
+    }
+
+    res.json({
+        success: false,
+        message: "Invalid Username or Password"
+    });
+
+});
+
+// Check Login
+app.get("/check-login", (req, res) => {
+
+    res.json({
+        loggedIn: req.session.loggedIn || false
+    });
+
+});
+
+// Logout
+app.get("/logout", (req, res) => {
+
+    req.session.destroy(() => {
+
+        res.json({
+            success: true
+        });
+
+    });
+
 });
 // Get Social Links
 app.get("/social", (req, res) => {
