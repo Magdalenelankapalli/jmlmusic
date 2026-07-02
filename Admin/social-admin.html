@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Media Admin</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#121212;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+background:#1f1f1f;
+padding:40px;
+border-radius:15px;
+width:500px;
+box-shadow:0 0 20px rgba(0,0,0,.5);
+}
+
+h1{
+text-align:center;
+margin-bottom:30px;
+color:#ff9800;
+}
+
+label{
+display:block;
+margin-top:20px;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+input{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+font-size:16px;
+outline:none;
+}
+
+button{
+margin-top:30px;
+width:100%;
+padding:15px;
+background:#ff9800;
+color:white;
+font-size:18px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+background:#ff7700;
+}
+
+#status{
+margin-top:20px;
+text-align:center;
+color:lightgreen;
+font-weight:bold;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:20px;
+color:#ff9800;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Social Media Admin</h1>
+
+<label>YouTube Link</label>
+<input id="youtube" type="text" placeholder="https://youtube.com/@channel">
+
+<label>Instagram Link</label>
+<input id="instagram" type="text" placeholder="https://instagram.com/username">
+
+<label>Facebook Link</label>
+<input id="facebook" type="text" placeholder="https://facebook.com/page">
+
+<button onclick="saveSocial()">
+Save Social Links
+</button>
+
+<div id="status"></div>
+
+<a class="back" href="dashboard.html">
+← Back to Dashboard
+</a>
+
+</div>
+
+<script>
+
+fetch("/social")
+.then(res=>res.json())
+.then(data=>{
+
+document.getElementById("youtube").value=data.youtube||"";
+document.getElementById("instagram").value=data.instagram||"";
+document.getElementById("facebook").value=data.facebook||"";
+
+});
+
+function saveSocial(){
+
+const social={
+
+youtube:document.getElementById("youtube").value,
+
+instagram:document.getElementById("instagram").value,
+
+facebook:document.getElementById("facebook").value
+
+};
+
+fetch("/social",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify(social)
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+document.getElementById("status").innerHTML="✅ Social Links Saved Successfully";
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
